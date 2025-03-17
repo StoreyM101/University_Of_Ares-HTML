@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>University Of Ares - Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Ares-University-Dashboard.css') }}">
+</head>
+
+<body>
+
+    <div class="content">
+        <img src="{{ url_for('static', filename='Ares.jpg') }}" alt="University of Ares logo" class="overlay-image">
+        <div class="text-container">
+            <h1 class="title">University Of Ares</h1>
+            <p class="slogan">Where Ambition Meets Achievement</p>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+
+        <div class="welcome-message">
+            <h2>Welcome to the University</h2>
+            <p>{{ user['name'] }}</p>
+        </div>
+
+        <div class="dashboard-row">
+            <div class="dashboard-sections">
+                <h2>Professor Information</h2>
+                <table class="professor-info">
+                    <thead>
+                        <tr>
+                            <th>Lecturer</th>
+                            <th>Subject</th>
+                            <th>Email</th>
+                            <th>Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lecturer in user['lecturers'] %}
+                        <tr>
+                            <td>{{ lecturer['Lecturer'] }}</td>
+                            <td>{{ lecturer['Subject'] }}</td>
+                            <td>{{ lecturer['Email'] }}</td>
+                            <td>{{ lecturer['Hours'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <form action="{{ url_for('logout') }}" method="POST">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+
+    </div>
+
+</body>
+</html>
