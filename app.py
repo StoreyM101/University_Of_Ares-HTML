@@ -1,15 +1,15 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session # Imports the Python module known as Flask - a micro web development framework.
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = os.urandom(24)  # Defines a key needed for efficient session handling.
 
-# Updated fake_users with structured transactions
-fake_users = {
-    "djohnny@gmail.com": {
-        "password": "mathislife01",
-        "name": "John Doe",
-        "lecturers": [
+# Defines the Data Dictionary when Ares-University-Dashboard.css appears on screen.
+fake_users = { # Used to simulate a real database.
+    "djohnny@gmail.com": { # Email field
+        "password": "mathislife01", # password field
+        "name": "John Doe", # Name of user field
+        "lecturers": [ # Dictionary holding information used inside the table
             {"Lecturer": "Garry Lees", "Subject": "Algebra", "Email": "garry.lees@gmail.com", "Hours": "9AM-5PM"},
             {"Lecturer": "Jayne Warner", "Subject": "Arithmetic", "Email": "jayne.warner@gmail.com", "Hours": "12PM-6PM"},
             {"Lecturer": "Moira Cope", "Subject": "Trigonometry", "Email": "moira.cope@gmail.com", "Hours": "9AM-5PM"},
@@ -21,38 +21,44 @@ fake_users = {
     }
 }
 
-# ________________ Login Route ________________
-@app.route("/", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        email = request.form["email"]
-        password = request.form["psw"]
+#_____________________________________________________________First Route (Login)_____________________________________________________________
 
-        if email in fake_users and fake_users[email]["password"] == password:
-            session["email"] = email  
-            return redirect(url_for("dashboard"))  
-        else:
-            return "Invalid credentials, please try again.", 401  
+@app.route("/", methods=["GET", "POST"]) # Defines the route for the Login page. Allows for HTTP GET and POST methods.
 
-    return render_template("Login.html")  
+def login(): # Defines Login function
+    if request.method == "POST": # If the request method is a HTTP POST request, it means that the user submitted a form.
+        email = request.form["email"] # Retrieves the entered email provided by user
+        password = request.form["psw"] # Retrieves the entered password provided by user
 
-# ________________ Dashboard Route ________________
-@app.route("/dashboard")
-def dashboard():
-    if "email" not in session:
-        return redirect(url_for("login"))  
+        if email in fake_users and fake_users[email]["password"] == password: # if the entered username/password is found within the fake_users dictionary.
+            session["email"] = email   # The email is stored within the session
+            return redirect(url_for("dashboard"))  # User is redirected to dashboard
+        else:  # if the entered email/password is not found within the fake_users dictionary.
+            return "Invalid credentials, please try again.", 401 # Present error 401 (Unauthorised client error response)
 
-    user_data = fake_users.get(session["email"])
-    if user_data:
-        return render_template("Dashboard.html", user=user_data)  
-    else:
-        return redirect(url_for("login"))  
+    return render_template("Login.html")  # Displays login form using GET request.
 
-# ________________ Logout Route ________________
-@app.route("/logout", methods=["POST"])
-def logout():
-    session.pop("email", None)  
-    return redirect(url_for("login"))  
+#_____________________________________________________________Second Route (University Dashboard)_____________________________________________________________
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route("/dashboard") # Defines the route for the Dashboard page.
+
+def dashboard(): # Defines dashboard function
+    if "email" not in session: # If username is not logged in the session
+        return redirect(url_for("login"))  # Redirects back to login page
+
+    user_data = fake_users.get(session["email"]) # Retrieves user data from Dictionary
+    if user_data: # If Data exists the move to next line
+        return render_template("Dashboard.html", user=user_data) # Passes user data to Dashboard
+    else: # If Data does not exist for user
+        return redirect(url_for("login"))  # Redirects back to login if user not found
+
+#_____________________________________________________________Third Route (Logout)_____________________________________________________________
+
+@app.route("/logout", methods=["POST"]) # Defines the route for when a user logs out. Allows for HTTP POST (used for resource creation) method.
+
+def logout(): # Defines function for logging out of Dashboard
+    session.pop("email", None) # Remove user from session
+    return redirect(url_for("login")) # Redirects users back to login screen 
+
+if __name__ == "__main__": # ensures script runs only when executed directly
+    app.run(debug=True) # enables auto-reload on code changes
