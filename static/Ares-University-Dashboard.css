@@ -1,0 +1,141 @@
+/* General Reset */
+* {
+    margin: 0; /*Removes default margin*/
+    padding: 0; /*Removes default padding*/
+    box-sizing: border-box; /*padding and border does not affect element width/height*/
+    font-family: Arial, sans-serif; /*Defines font family*/
+}
+
+html, body {
+    height: 100%; /*Ensures that the background covers the entire page height*/
+    width: 100%; /*Ensures that the background covers the entire page width*/
+}
+
+/* Background Image */
+body {
+    background: url("/static/libraryview.jpg") no-repeat center center fixed; /*URL for background image, centered, fixed and only one copy shown*/
+    background-size: cover; /*Ensures the background image adapts to the window size*/
+}
+
+/* Content Container */
+.content {
+    position: absolute; /*Covers the entirety of the container (separate from normal flow)*/
+    top: 0; /*Positions content at the top of the page*/
+    left: 0; /*Aligns it to the left*/
+    display: flex; /*specifies display behavior, makes elements responsive by adjusting their sizing*/
+    align-items: center; /*Aligns elements vertically*/
+    z-index: 2; /* Image and text appear above the video */
+}
+
+/* Overlay Image */
+.overlay-image {
+    width: 125px; /* Adjust the width of the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Text Container */
+.text-container {
+    display: flex; /*specifies display behavior, makes elements responsive by adjusting their sizing*/
+    flex-direction: column; /*Arranges text in a column*/
+    justify-content: center; /*Centers text vertically*/
+    width: 500px; /*Controls container width*/
+    height: 125px; /*Controls container height*/
+    background-color: rgba(255, 0, 0, 0.8); /*Creates color (RGB) with opacity option (0.8)*/
+    padding: 20px; /*Adds padding inside text box*/
+}
+
+/* Title */
+.title {
+    font-family: 'Arial', sans-serif; /*Defines font family*/
+    font-size: 2rem; /* Adjust the font size */
+    margin-bottom: 10px; /* Space between the title and slogan */
+    color: rgb(0, 0, 0); /*Sets text colour*/
+}
+
+/* Slogan */
+.slogan {
+    font-family: 'Arial', sans-serif; /*Defines font family*/
+    font-size: 1.3rem; /*Adjust the font size*/
+    color: rgb(59, 56, 56); /*Sets text colour*/
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    position: absolute; /*Covers the entirety of the container (separate from normal flow)*/
+    top: 20%; /*Positions content at the top of the page*/
+    left: 20%; /*Aligns it to the left*/
+    width: 60%; /*Controls container width*/
+    padding: 20px; /*Adds padding inside text box*/
+    border-radius: 10px; /*Allows the container to have rounded edges*/
+    background-color: rgba(53, 53, 53, 0.8); /*Creates color (RGB) with opacity option (0.8)*/
+}
+
+/* Welcome Message */
+.welcome-message {
+    background: rgb(255, 64, 0); /*Sets background style of element*/
+    padding: 20px; /*Adds padding inside text box*/
+    border-radius: 10px; /*Allows the container to have rounded edges*/
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /*Ensures there is a shadow within a container*/
+    text-align: center; /*used to align text specifically*/
+    margin-bottom: 20px; /*Sets space from the bottom*/
+}
+
+/* Dashboard Sections */
+.dashboard-sections {
+    background: linear-gradient(135deg, #f38225, #ff0000); /*Sets background style properties as gradient*/
+    padding: 20px; /*Adds padding inside text box*/
+    border-radius: 10px; /*Allows the container to have rounded edges*/
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /*Ensures there is a shadow within a container*/
+    text-align: center; /*used to align text specifically*/
+}
+
+.welcome-message h2,
+.dashboard-sections h2 {
+    text-decoration: underline; /*This here defines an underline behind headers*/
+    text-underline-offset: 5px; /*This here defines the space between the text and underline*/
+    text-decoration-thickness: 2px; /*This here sets the underline thickness*/
+    margin-bottom: 10px; /*Sets space from the bottom*/
+    text-align: center; /*used to align text specifically*/
+}
+
+/* General Table Styling */
+table {
+    width: 100%; /* Adjust the width of the table container*/
+    border-collapse: collapse; /*sets whether table borders should collapse into a single border*/
+    border: 2px solid black; /*Sets a border around the element.*/
+}
+
+/* Table Header & Cells */
+th, td {
+    border: 2px solid black; /*Sets a border around the element.*/
+    padding: 8px; /*Adds padding inside text box*/
+    text-align: left; /*used to align text specifically*/
+    color: black; /*Sets text colour*/
+}
+
+th {
+    background-color: rgba(0, 0, 0, 0.4); /* Creates color (RGB) with opacity option */
+}
+
+/* Logout Button Styling */
+.logout-button {
+    position: fixed;
+    top: 10px; /*Positions content at the top of the page*/
+    right: 10px; /*Aligns it to the right*/
+    background-color: rgb(255, 51, 0); /* Creates color (RGB) with opacity option */
+    color: white; /*Sets text colour*/
+    font-size: 1rem; /* Adjust the font size */
+    padding: 10px 20px; /*Adds padding inside text box*/
+    border: 3px solid black; /*Defines a border*/
+    border-radius: 5px; /*Allows the container to have rounded edges*/
+    cursor: pointer; /*specifies the mousr cursor to appear over element*/
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /*Ensures there is a shadow within a container*/
+}
+
+.logout-button:hover {
+    background-color: #ff3333; /* Creates color (RGB) with opacity option */
+}
+
+.logout-button:active {
+    background-color: #cc2929; /* Creates color (RGB) with opacity option */
+}

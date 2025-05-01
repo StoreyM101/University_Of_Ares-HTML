@@ -1,0 +1,63 @@
+<!DOCTYPE html> <!--Document Type Decleration for HTML-->
+<html lang="en"> <!--Specifies the English Language-->
+
+<head> <!--Head of the HTML-->
+    <title>University Of Ares - Dashboard</title> <!--Title of the HTML-->
+    <meta charset="UTF-8"> <!--Specifies UTF-8 Character Encoding Standard-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Size of the visible area on the screen-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Ares-University-Dashboard.css') }}"> <!--Specifies the CSS style sheet via static link-->
+</head> <!--End of HTML Head-->
+
+<body> <!--Start of HTML Body-->
+
+    <div class="content"> <!--"content" class (top-left of webpage)-->
+        <img src="{{ url_for('static', filename='Ares.jpg') }}" alt="Ares logo" class="overlay-image"> <!--Defines an image to overlay over background-->
+        <div class="text-container"> <!--"text-container" nested class-->
+            <h1 class="title">University Of Ares</h1> <!--Header Definition-->
+            <p class="slogan">Where Ambition Meets Achievement</p> <!--Paragraph definition for text-->
+
+        </div> <!--End of nested "text-container" class-->
+    </div> <!--End of class "content"-->
+
+    <div class="dashboard-container"> <!--"dashboard-container" class-->
+
+        <div class="welcome-message"> <!--"welcome-message" nested class-->
+            <h2>Welcome to the University</h2> <!--Header Definition-->
+            <p>{{ user['name'] }}</p> <!--Paragraph representing a value referenced inside a Flask application-->
+        </div> <!--End of nested class-->
+
+        <div class="dashboard-row"> <!--"dashboard-row" nested class-->
+            <div class="dashboard-sections"> <!--"dashboard-sections" nested class-->
+                <h2>Professor Information</h2> <!--Header Definition-->
+                <table class="professor-info"> <!--Table class "professor-info" defined-->
+                    <thead> <!--Header of the table -->
+                        <tr> <!--Start of row definition-->
+                            <th>Lecturer</th>
+                            <th>Subject</th>
+                            <th>Email</th>
+                            <th>Hours</th>
+                        </tr> <!--End of row definition-->
+                    </thead> <!--End of table header-->
+                    <tbody> <!--Table body definition-->
+                        {% for lecturer in user['lecturers'] %} <!--Loop through dictionary of data-->
+                        <tr> <!--Start of row definitions-->
+                            <td>{{ lecturer['Lecturer'] }}</td>
+                            <td>{{ lecturer['Subject'] }}</td>
+                            <td>{{ lecturer['Email'] }}</td>
+                            <td>{{ lecturer['Hours'] }}</td>
+                        </tr> <!--End of row definitions-->
+                        {% endfor %} <!--End of for loop-->
+                    </tbody> <!--End of table body-->
+                </table> <!--End of table-->
+            </div> <!--End of nested class "dashboard-sections"-->
+        </div> <!--End of class "dashboard-row"-->
+
+        <form action="{{ url_for('logout') }}" method="POST"> <!--HTML form allowing for user input (passed onto a server for processing using HTTP POST request)-->
+            <button type="submit" class="logout-button">Logout</button> <!--Button to submit user input-->
+        </form> <!--End of form-->
+
+    </div> <!--End of "dashboard-container" class-->
+
+</body> <!--End of HTML Body-->
+
+</html> <!--End of HTML code-->
